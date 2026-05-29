@@ -6,3 +6,9 @@ Project website sederhana berbasis PHP
 project ini disusun untuk memenuhi tugas tambahan pada proyek ujian akhir praktikum (UAP) responsi matakuliah Basis Data yang berfokus pada implementasi sederhana DBMS berbasis laragon.
 
 disusun oleh:
+Ajeng Dwi Andini
+Mayang Sari
+Chalilaika Novikri 
+Hiroba Ikhtiyar 
+
+project web lokal sederhana ini adalah lanjutan dari implementasi database berbasis mysql.
