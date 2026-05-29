@@ -1,71 +1,63 @@
+<?php
+// Hubungkan dengan file koneksi (naik satu folder ke config)
+require_once '../config/database.php';
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMDK - Sistem Informasi Manajemen Data Karyawan</title>
+    <title>Data Departemen - SIMDK</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
 </head>
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.php">SIMDK</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.php">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="departemen/index.php">Kelola Departemen</a>
-                    </li>
-                </ul>
+<body class="bg-light">
+    
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Data Departemen</h2>
+            <div>
+                <a href="../index.php" class="btn btn-secondary">Kembali ke Beranda</a>
+                <a href="tambah.php" class="btn btn-primary">Tambah Data Baru</a>
             </div>
         </div>
-    </nav>
 
-    <section class="hero-section text-center">
-        <div class="container fade-in-down">
-            <h1 class="display-4 fw-bold mb-4">Selamat Datang di SIMDK</h1>
-            <p class="lead mb-5">Sistem Informasi Manajemen Data Karyawan yang terpusat, modern, dan efisien.</p>
-            <a href="departemen/index.php" class="btn btn-light btn-lg px-5 rounded-pill shadow-sm">Mulai Kelola Data</a>
-        </div>
-    </section>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-bordered table-striped text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Dept</th>
+                            <th>Nama Departemen</th>
+                            <th>Lokasi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Query ambil data dari tabel departemen
+                        $query = "SELECT * FROM departemen ORDER BY id_departemen DESC";
+                        $result = mysqli_query($conn, $query);
+                        $no = 1;
 
-    <section class="py-5 bg-light text-center">
-        <div class="container">
-            <h2 class="mb-4">Fitur Utama</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="p-4 bg-white shadow-sm rounded">
-                        <h4 class="fw-bold">Manajemen Terpusat</h4>
-                        <p class="text-muted">Kelola data karyawan, departemen, dan jabatan dalam satu platform.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-4 bg-white shadow-sm rounded">
-                        <h4 class="fw-bold">UI/UX Modern</h4>
-                        <p class="text-muted">Desain antarmuka yang bersih dan responsif di berbagai perangkat.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-4 bg-white shadow-sm rounded">
-                        <h4 class="fw-bold">Akses Cepat</h4>
-                        <p class="text-muted">Dibangun dengan Native PHP untuk performa dan waktu muat yang ringan.</p>
-                    </div>
-                </div>
+                        // Perulangan untuk menampilkan data baris per baris
+                        while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $row['kode_dept']; ?></td>
+                            <td><?= $row['nama_departemen']; ?></td>
+                            <td><?= $row['lokasi']; ?></td>
+                            <td>
+                                <a href="edit.php?id=<?= $row['id_departemen']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="hapus.php?id=<?= $row['id_departemen']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?');">Hapus</a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p class="mb-0">&copy; 2026 SIMDK - Perusahaan Anda. All rights reserved.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
