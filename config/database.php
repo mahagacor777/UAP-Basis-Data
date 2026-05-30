@@ -3,7 +3,7 @@
 $host = "localhost"; // Server localhost Laragon
 $user = "root";      // User default MySQL Laragon
 $pass = "";          // Password default (kosong)
-$db   = "db_simdk";  // Nama database yang Anda buat
+$db   = "db_simdk";  // Nama database yang  buat
 
 // Membuat koneksi
 $conn = mysqli_connect($host, $user, $pass, $db);
